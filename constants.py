@@ -1,2 +1,2 @@
-hint = False
-reveal = True
+hint_taken = False
+revealed = False
