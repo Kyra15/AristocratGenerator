@@ -47,8 +47,6 @@ if "\"" in encoded:
     encoded = "\"" + encoded + "\""
 print("encoded:", encoded.upper())
 
-hint = False
-reveal = False
-fn.take_input(og_str, hint, freq, reveal)
+fn.take_input(og_str, freq)
 
 
