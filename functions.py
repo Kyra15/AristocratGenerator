@@ -2,21 +2,17 @@ import random
 import re
 import constants as c
 
-alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
-            "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
-            "u", "v", "w", "x", "y", "z"]
-
 
 def assign(set_uniq, encoded_str):
     freq = {}
-    for i in alphabet:
+    for i in c.alphabet:
         freq.update({i.upper(): 0})
 
     order = {}
 
     for i in set_uniq:
         rand = random.randint(0, len(alphabet) - 1)
-        new = alphabet.pop(rand)
+        new = c.alphabet.pop(rand)
         order.update({new.upper(): find(encoded_str, i)})
 
     encode_lst = list(encoded_str)
