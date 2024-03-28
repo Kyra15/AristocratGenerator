@@ -1,5 +1,6 @@
 import random
 import re
+import constants as c
 
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
             "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
@@ -39,9 +40,8 @@ def replace(lst, i, ch):
     return lst
 
 
-def hint(hint_taken, answer):
-    if not hint_taken:
-        hint_taken = True
+def hint(answer):
+    if not c.hint_taken:
         hint_num = random.randint(1, 3)
         if hint_num == 1:
             print(f"The first word is '{answer.split(' ')[0]}'")
@@ -49,13 +49,12 @@ def hint(hint_taken, answer):
             print(f"The last word is '{answer.split(' ')[-1]}'")
         else:
             print(f"The quote contains the word '{answer.split(' ')[random.randint(0, len(answer.split(' ')) - 1)]}'")
-        return hint_taken
+        c.hint_taken = True
     else:
         print("You already took a hint.")
-        return hint_taken
 
 
-def take_input(og, hint_taken, freq, revealed):
+def take_input(og, freq):
     answer = og.replace("'", "")
     answer = re.sub(r'\W+', ' ', answer.lower()).strip()
 
@@ -73,20 +72,20 @@ def take_input(og, hint_taken, freq, revealed):
                               "to reveal the quote (type \"reveal\"), "
                               "or to cancel (type \"cancel\")?\n").lower().strip()
             if other_inp == "hint":
-                hint_taken = hint(hint_taken, answer)
+                hint(hint_taken, answer)
             elif other_inp == "freq":
                 print(freq)
             elif other_inp == "reveal":
                 print(f"The answer is: \"{og}\"")
-                revealed = True
+                c.revealed = True
                 break
             elif other_inp == "cancel":
-                take_input(answer, hint_taken, freq)
+                take_input(answer, freq)
                 break
             else:
                 print("That's not a valid option.")
-        elif user_ans == "exit" or revealed:
+        elif user_ans == "exit" or c.revealed:
             break
         else:
             print("That's not a valid option.")
-            take_input(answer, hint_taken, freq)
+            take_input(answer, freq)
