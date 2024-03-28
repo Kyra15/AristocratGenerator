@@ -1,0 +1,2 @@
+hint = False
+reveal = True
