@@ -11,7 +11,7 @@ def assign(set_uniq, encoded_str):
     order = {}
 
     for i in set_uniq:
-        rand = random.randint(0, len(alphabet) - 1)
+        rand = random.randint(0, len(c.alphabet) - 1)
         new = c.alphabet.pop(rand)
         order.update({new.upper(): find(encoded_str, i)})
 
@@ -51,10 +51,11 @@ def hint(answer):
 
 
 def take_input(og, freq):
-    answer = og.replace("'", "")
+    answer = og
+    answer = answer.replace("'", "")
     answer = re.sub(r'\W+', ' ', answer.lower()).strip()
 
-    if not hint_taken:
+    if not c.hint_taken:
         user_ans = input("\nInput your translation (no punctuation required), \"other\""
                          " if you want other options, or \"exit\" to quit the program:\n").lower().strip()
     else:
@@ -68,7 +69,7 @@ def take_input(og, freq):
                               "to reveal the quote (type \"reveal\"), "
                               "or to cancel (type \"cancel\")?\n").lower().strip()
             if other_inp == "hint":
-                hint(hint_taken, answer)
+                hint(answer)
             elif other_inp == "freq":
                 print(freq)
             elif other_inp == "reveal":
